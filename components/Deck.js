@@ -5,6 +5,7 @@ export default class Deck extends Component {
     render() {
         return (
             <View>
+                <Text> stardddddd </Text>
                 <Text> A Deck component</Text>
             </View>
         )
