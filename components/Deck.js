@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 export default class Deck extends Component {
     render() {
         return (
-            <View>
-                <Text> stardddddd </Text>
+            <View style={styles.deck}>
                 <Text> A Deck component</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    deck: {
+        marginTop: 100
+    }
+})
