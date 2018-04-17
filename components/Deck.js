@@ -5,10 +5,11 @@ export default class Deck extends Component {
     render() {
         return (
             <View style={styles.deck}>
-                <Text> A Deck component</Text>
+                <Text> A Deck component aaa</Text>
             </View>
         )
     }
+
 }
 
 const styles = StyleSheet.create({

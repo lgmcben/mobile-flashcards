@@ -6,6 +6,22 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
+import { TabNavigator } from 'react-navigation'
+
+const Tabs = TabNavigator({
+  DeckList: {
+    screen: DeckList,
+    navigationOption: {
+      tabBarLabel: 'Deck List'
+    }
+  },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOption: {
+      tabBarLabel: 'New Deck'
+    }
+  },
+})
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -15,10 +31,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <View>
-          <DeckList />
-          <NewDeck />
-        </View>
+          <Tabs />
       </Provider>
     );
   }
