@@ -4,7 +4,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
-import Deck from './components/Deck'
+import DeckList from './components/DeckList'
+import NewDeck from './components/NewDeck'
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -15,7 +16,8 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View>
-          <Deck />
+          <DeckList />
+          <NewDeck />
         </View>
       </Provider>
     );
