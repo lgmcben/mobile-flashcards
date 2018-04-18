@@ -8,11 +8,15 @@ export default class DeckList extends Component {
 
     componentDidMount() {
         this.setState({ decks: DeckApi.getDecks()})
+
+
     }
     render() {
         return (
             <View style={styles.deck}>
-                <Text>{JSON.stringify(this.state.decks)}</Text>
+                <Text>{this.state.decks && JSON.stringify( Object.keys(this.state.decks) )}</Text>
+
+
             </View>
         )
     }
