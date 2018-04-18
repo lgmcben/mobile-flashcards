@@ -14,9 +14,11 @@ export default class DeckList extends Component {
     render() {
         return (
             <View style={styles.deck}>
-                <Text>{this.state.decks && JSON.stringify( Object.keys(this.state.decks) )}</Text>
-
-
+                {this.state.decks && Object.keys(this.state.decks).map((key) => {
+                    return(
+                        <Text key={key}>{key}</Text>
+                    )
+                })}
             </View>
         )
     }
