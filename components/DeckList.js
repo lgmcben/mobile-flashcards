@@ -3,13 +3,16 @@ import { View, Text, StyleSheet } from 'react-native'
 import * as DeckApi from '../utils/api'
 
 export default class DeckList extends Component {
+
+    state = {}
+
     componentDidMount() {
-        console.log('test api', DeckApi.getDecks());
+        this.setState({ decks: DeckApi.getDecks()})
     }
     render() {
         return (
             <View style={styles.deck}>
-                <Text>A DeckList component</Text>
+                <Text>{JSON.stringify(this.state.decks)}</Text>
             </View>
         )
     }
