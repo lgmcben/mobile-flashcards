@@ -18,30 +18,52 @@ export default class DeckDetail extends Component {
         console.log('DeckDetail render() props=', this.props);
         console.log('DeckDetail render() state=', this.state);
         const { deck } = this.state;
-        console.log('deck=', deck);
-        const numberOfQuestions = deck.questions;
-        console.log('numberOfQuestions=', numberOfQuestions);
         return (
-
-            <View style={styles.deck}>
-                <Text>title: {deck.title}</Text>
-                {deck.questions && <Text>{deck.questions.length} cards</Text>}
+            <View style={styles.container}>
+                <Text style={styles.textLarge}>{deck.title}</Text>
+                {deck.questions && <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>}
+                <TouchableOpacity style={styles.buttonAddCard}>
+                    <Text>Add Card</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonStartQuiz}>
+                    <Text style={{color: 'white'}}>Start Quiz</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    deck: {
+    container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10
+    },
+    textLarge: {
+        fontSize: 18
+    },
+    buttonAddCard: {
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 20,
         marginRight: 20,
         marginTop: 20,
+        marginBottom: 10,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'white'
+    },
+    buttonStartQuiz: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 20,
+        marginRight: 20,
         marginBottom: 20,
         padding: 10,
         borderWidth: 1,
-        borderRadius: 10
+        borderRadius: 10,
+        backgroundColor: 'black'
     }
 })
