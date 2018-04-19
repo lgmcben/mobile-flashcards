@@ -1,9 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
-export function getDecks() {
-  return {
+const tempData = {
     React: {
-      id: 'xxx',
       title: 'React',
       questions: [
         {
@@ -17,7 +15,6 @@ export function getDecks() {
       ]
     },
     JavaScript: {
-      id: 'yyy',
       title: 'JavaScript',
       questions: [
         {
@@ -27,10 +24,16 @@ export function getDecks() {
       ]
     }
   }
+
+export function getDecks() {
+      const arrayOfDecks = Object.keys(tempData).map((key) => {
+        return {...tempData[key], id: key}
+      });
+  return arrayOfDecks;
 }
 
 export function getDeck(id) {
-
+    return tempData[id];
 }
 
 export function saveDeckTitle(title) {

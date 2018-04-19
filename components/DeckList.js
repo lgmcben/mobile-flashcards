@@ -9,9 +9,7 @@ export default class DeckList extends Component {
 
     componentDidMount() {
         const decks = DeckApi.getDecks();
-        const arrayOfDecks = Object.keys(decks).map((key) => decks[key]);
-        console.log('DeckList props = ', this.props);
-        this.setState({ decks: arrayOfDecks })
+        this.setState({ decks })
     }
 
     renderItem = ({ item }) => {

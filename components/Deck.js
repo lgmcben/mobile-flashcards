@@ -18,7 +18,7 @@ export default class Deck extends Component {
         //ben temp navigate after animation end
         //]).start(this.props.onDeckPressed2);
 
-        this.props.navigation.navigate('DeckDetail', { id: this.props.id, title: this.props.title, questions: this.props.questions });
+        this.props.navigation.navigate('DeckDetail', { id: this.props.id });
 
     }
 
