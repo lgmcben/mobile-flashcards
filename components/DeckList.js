@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native'
 import * as DeckApi from '../utils/api'
+import Deck from './Deck'
 
 export default class DeckList extends Component {
 
@@ -14,7 +15,7 @@ export default class DeckList extends Component {
     }
 
     renderItem = ({ item }) => {
-        return <Text>{item.title}</Text>
+        return <Deck {...item} />
     }
 
     render() {

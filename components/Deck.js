@@ -5,7 +5,7 @@ export default class Deck extends Component {
     render() {
         return (
             <View style={styles.deck}>
-                <Text> A Deck component aaa</Text>
+                <Text> {this.props.title}</Text>
             </View>
         )
     }
