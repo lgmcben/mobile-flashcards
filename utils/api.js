@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native'
 export function getDecks() {
   return {
     React: {
+      id: 'xxx',
       title: 'React',
       questions: [
         {
@@ -16,6 +17,7 @@ export function getDecks() {
       ]
     },
     JavaScript: {
+      id: 'yyy',
       title: 'JavaScript',
       questions: [
         {

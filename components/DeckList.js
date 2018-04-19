@@ -14,12 +14,6 @@ export default class DeckList extends Component {
         this.setState({ decks: arrayOfDecks })
     }
 
-    navigateToDeckDetail = () => {
-        console.log('navigateToDeckDetail props = ', this.props)
-        this.props.navigation.navigate('DeckDetail',
-        { id: 1 });
-    }
-
     renderItem = ({ item }) => {
         return <Deck {...item} navigation={this.props.navigation} />
     }

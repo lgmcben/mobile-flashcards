@@ -4,9 +4,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 export default class DeckDetail extends Component {
 
     render() {
+        console.log('DeckDetail', this.props);
         return (
             <View style={styles.deck}>
-                <Text>Individual Deck View</Text>
+                <Text>id: {this.props.navigation.state.params.id}</Text>
+                <Text>{this.props.navigation.state.params.title}</Text>
+                <Text style={{color: 'gray'}}>{this.props.navigation.state.params.questions.length} cards</Text>
             </View>
         )
     }
