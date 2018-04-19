@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 import * as DeckApi from '../utils/api'
 
 export default class DeckList extends Component {
@@ -7,22 +7,23 @@ export default class DeckList extends Component {
     state = {}
 
     componentDidMount() {
-        // const decks = DeckApi.getDecks();
-        // const arrayOfDecks = Object.keys(decks).map((key) => decks[key]);
-        // console.log('arrayOfDecks', arrayOfDecks);
-
-        this.setState({ decks: DeckApi.getDecks()})
-
-
+        const decks = DeckApi.getDecks();
+        const arrayOfDecks = Object.keys(decks).map((key) => decks[key]);
+        console.log('arrayOfDecks', arrayOfDecks);
+        this.setState({ decks: arrayOfDecks })
     }
+
+    renderItem = ({ item }) => {
+        return <Text>{item.title}</Text>
+    }
+
     render() {
         return (
             <View style={styles.deck}>
-                {this.state.decks && Object.keys(this.state.decks).map((key) => {
-                    return(
-                        <Text key={key}>{key}</Text>
-                    )
-                })}
+                <FlatList
+                    data={this.state.decks}
+                    renderItem={this.renderItem}
+                />
             </View>
         )
     }
