@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Animated } from 'react-native'
 
 export default class Deck extends Component {
     render() {
         return (
             <View key={this.props.title} style={styles.deck}>
                 <Text>{this.props.title}</Text>
-                <Text>{this.props.questions.length} cards</Text>
+                <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
             </View>
         )
     }
@@ -23,7 +23,5 @@ const styles = StyleSheet.create({
         padding: 10,
         borderWidth: 1,
         borderRadius: 10
-
-
     }
 })
