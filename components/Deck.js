@@ -1,17 +1,30 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Animated } from 'react-native'
+import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native'
 
 export default class Deck extends Component {
     state = {
-        opacity: new Animated.Value(1)
+        bounceValue: new Animated.Value(1)
     }
+
+
+    onDeckPressed = () => {
+        console.log('onDeckPressed');
+        const { bounceValue } = this.state
+        Animated.sequence([
+            Animated.timing(bounceValue, { duration: 200, toValue: 1.05} ),
+            Animated.spring(bounceValue, { toValue: 1, friction: 5})
+        ]).start()
+    }
+
     render() {
-        const { opacity } = this.state;
+        const { bounceValue } = this.state;
         return (
-            <Animated.View key={this.props.title} style={[styles.deck, { opacity }]}>
-                <Text>{this.props.title}</Text>
-                <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
-            </Animated.View>
+            <TouchableOpacity onPress={this.onDeckPressed}>
+                <Animated.View key={this.props.title} style={[styles.deck, { transform: [{ scale: bounceValue }] }]}>
+                    <Text>{this.props.title}</Text>
+                    <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
+                </Animated.View>
+            </TouchableOpacity>
         )
     }
 
