@@ -4,8 +4,9 @@ import { View, Text, StyleSheet } from 'react-native'
 export default class Deck extends Component {
     render() {
         return (
-            <View style={styles.deck}>
-                <Text> {this.props.title}</Text>
+            <View key={this.props.title} style={styles.deck}>
+                <Text>{this.props.title}</Text>
+                <Text>{this.props.questions.length} cards</Text>
             </View>
         )
     }
@@ -14,6 +15,15 @@ export default class Deck extends Component {
 
 const styles = StyleSheet.create({
     deck: {
-        marginTop: 100
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 20,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10
+
+
     }
 })
