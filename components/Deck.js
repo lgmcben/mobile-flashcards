@@ -8,12 +8,18 @@ export default class Deck extends Component {
 
 
     onDeckPressed = () => {
-        console.log('onDeckPressed');
+
+        console.log('onDeckPressed props = ', this.props);
         const { bounceValue } = this.state
         Animated.sequence([
             Animated.timing(bounceValue, { duration: 200, toValue: 1.05} ),
-            Animated.spring(bounceValue, { toValue: 1, friction: 5})
-        ]).start()
+            Animated.spring(bounceValue, { toValue: 1, friction: 5}),
+        ]).start();
+        //ben temp navigate after animation end
+        //]).start(this.props.onDeckPressed2);
+
+        this.props.navigation.navigate('DeckDetail', { id: 1 });
+
     }
 
     render() {
