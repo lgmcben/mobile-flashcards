@@ -17,7 +17,8 @@ export default class NewDeck extends Component {
     }
 
     submitNewDeck = () => {
-
+        const uuidv1 = require('uuid/v1');
+        console.log('uuid =', uuidv1());
     }
 
     render() {

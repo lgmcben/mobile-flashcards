@@ -1,5 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
+const DECK_STORAGE_KEY = 'my_deck_storage_key'
+
 const tempData = {
     React: {
       title: 'React',
