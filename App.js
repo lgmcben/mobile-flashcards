@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
@@ -7,6 +7,15 @@ import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
 import Quiz from './components/Quiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
+import { Constants } from 'expo'
+
+const MyStatusBar = ({ backgroundColor, ...props}) => {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -47,7 +56,10 @@ export default class App extends React.Component {
 
   render() {
     return (
+        <View style={{ flex: 1 }}>
+          <MyStatusBar backgroundColor={'black'}/>
           <MainNavigator />
+        </View>
     );
   }
 }
