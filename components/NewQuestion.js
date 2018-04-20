@@ -11,11 +11,32 @@ export default class NewQuestion extends Component {
         textQuestion: '',
         textAnswer: '',
     }
+
+    handleQuestionTextChange = (textQuestion) => {
+        this.setState(() => ({
+            textQuestion
+        }));
+    }
+
+    handleAnswerTextChange = (textAnswer) => {
+        this.setState(() => ({
+            textAnswer
+        }));
+    }
+
     render() {
+        console.log('NewQuestion state = ', this.state);
         const { textQuestion, textAnswer } = this.state
         return (
             <View style={styles.container}>
-                <TextInput>{textQuestion}</TextInput>
+                <TextInput
+                    style={styles.textInput}
+                    value={textQuestion}
+                    onChangeText={this.handleQuestionTextChange}/>
+                <TextInput
+                    style={styles.textInput}
+                    value={textAnswer}
+                    onChangeText={this.handleAnswerTextChange}/>
             </View>
         )
     }
