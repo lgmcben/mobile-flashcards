@@ -14,6 +14,14 @@ export default class DeckDetail extends Component {
         this.setState({ deck });
     }
 
+    goToNewQuestionView = () => {
+        this.props.navigation.navigate('NewQuestion', {} );
+    }
+
+    goToQuizView = () => {
+        this.props.navigation.navigate('Quiz', {} );
+    }
+
     render() {
         console.log('DeckDetail render() props=', this.props);
         console.log('DeckDetail render() state=', this.state);
@@ -22,10 +30,10 @@ export default class DeckDetail extends Component {
             <View style={styles.container}>
                 <Text style={styles.textLarge}>{deck.title}</Text>
                 {deck.questions && <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>}
-                <TouchableOpacity style={styles.buttonAddCard}>
+                <TouchableOpacity style={styles.buttonAddCard} onPress={this.goToNewQuestionView}>
                     <Text>Add Card</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonStartQuiz}>
+                <TouchableOpacity style={styles.buttonStartQuiz} onPress={this.goToQuizView}>
                     <Text style={{color: 'white'}}>Start Quiz</Text>
                 </TouchableOpacity>
             </View>

@@ -4,6 +4,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import NewDeck from './components/NewDeck'
+import NewQuestion from './components/NewQuestion'
+import Quiz from './components/Quiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 
 const Tabs = TabNavigator({
@@ -27,6 +29,12 @@ const MainNavigator = StackNavigator({
   },
   DeckDetail: {
     screen: DeckDetail,
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+  },
+  Quiz: {
+    screen: Quiz,
   }
 }, {
   headerMode: 'none'
