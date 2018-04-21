@@ -28,7 +28,12 @@ export default class Deck extends Component {
             <TouchableOpacity onPress={this.onDeckPressed}>
                 <Animated.View key={this.props.title} style={[styles.deck, { transform: [{ scale: bounceValue }] }]}>
                     <Text style={styles.textLarge}>{this.props.title}</Text>
-                    <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
+                    {this.props.questions?
+                        <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
+                        :
+                        <Text style={{color: 'gray'}}>0 cards</Text>
+                    }
+                    
                 </Animated.View>
             </TouchableOpacity>
         )

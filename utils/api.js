@@ -28,10 +28,20 @@ const tempData = {
   }
 
 export function getDecks() {
-      const arrayOfDecks = Object.keys(tempData).map((key) => {
-        return {...tempData[key], id: key}
-      });
-  return arrayOfDecks;
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
+    const data = JSON.parse(results)
+    console.log('getDecks data =', data); 
+    const arrayOfDecks = Object.keys(data).map((key) => {
+      return {...data[key], id: key}
+    });
+    return arrayOfDecks;
+  });
+
+
+  //     const arrayOfDecks = Object.keys(tempData).map((key) => {
+  //       return {...tempData[key], id: key}
+  //     });
+  // return arrayOfDecks;
 }
 
 export function getDeck(id) {
