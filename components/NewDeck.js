@@ -22,7 +22,9 @@ export default class NewDeck extends Component {
         if (/\S/.test(this.state.title)) {
             const uuidv1 = require('uuid/v1');
             const key = uuidv1();
-            DeckApi.saveDeckTitle(this.state.title, key);
+            DeckApi.saveDeckTitle(this.state.title, key)
+            .then(() => { this.props.navigation.navigate('DeckDetail', { id: 'React' }); })
+
         }else{
             // Works on both iOS and Android
             Alert.alert(

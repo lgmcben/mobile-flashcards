@@ -40,7 +40,7 @@ export function getDeck(id) {
 
 export function saveDeckTitle(title, key) {
   console.log('saveDeckTitle');
-  const myPromise = AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [key]: { title }
   }))
   console.log('saveDeckTitle promise = ', myPromise);
