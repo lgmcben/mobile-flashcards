@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native'
 import * as DeckApi from '../utils/api'
 
 // New Question View
@@ -19,9 +19,23 @@ export default class NewDeck extends Component {
     }
 
     submitNewDeck = () => {
-        const uuidv1 = require('uuid/v1');
-        const key = uuidv1();
-        DeckApi.saveDeckTitle(this.state.title, key);
+        if (/\S/.test(this.state.title)) {
+            const uuidv1 = require('uuid/v1');
+            const key = uuidv1();
+            DeckApi.saveDeckTitle(this.state.title, key);
+        }else{
+            // Works on both iOS and Android
+            Alert.alert(
+              'Deck name is empty',
+              'Please enter a deck name',
+              [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ],
+              { cancelable: true }
+            )
+            console.log('empty deck name');
+        }
+        
     }
 
     render() {
