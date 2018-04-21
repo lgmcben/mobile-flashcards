@@ -45,7 +45,11 @@ export function getDecks() {
 }
 
 export function getDeck(id) {
-    return tempData[id];
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
+    const data = JSON.parse(results)
+    console.log('get SINGLE Deck, data =', data); 
+    return data[id];
+  });
 }
 
 export function saveDeckTitle(title, key) {

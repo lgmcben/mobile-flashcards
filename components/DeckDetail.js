@@ -5,13 +5,14 @@ import * as DeckApi from '../utils/api'
 export default class DeckDetail extends Component {
 
     state = {
-        deck: {}
+        deck: { title: '', questions: '' }
     }
 
     componentDidMount() {
-        const deck = DeckApi.getDeck(this.props.navigation.state.params.id);
-        console.log('DeckDetail', deck);
-        this.setState({ deck });
+        DeckApi.getDeck(this.props.navigation.state.params.id)
+        .then((deck) => { this.setState({ deck }) });
+
+        
     }
 
     goToNewQuestionView = () => {
@@ -28,8 +29,14 @@ export default class DeckDetail extends Component {
         const { deck } = this.state;
         return (
             <View style={styles.container}>
-                {deck && deck.title && <Text style={styles.textLarge}>{deck.title}</Text>}
-                {deck && deck.questions && <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>}
+                <Text style={styles.textLarge}>{deck.title}</Text>
+
+                {deck.questions?
+                        <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
+                        :
+                        <Text style={{color: 'gray'}}>0 cards</Text>
+                }
+
                 <TouchableOpacity style={styles.buttonAddCard} onPress={this.goToNewQuestionView}>
                     <Text>Add Card</Text>
                 </TouchableOpacity>
