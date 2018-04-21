@@ -28,8 +28,8 @@ export default class DeckDetail extends Component {
         const { deck } = this.state;
         return (
             <View style={styles.container}>
-                <Text style={styles.textLarge}>{deck.title}</Text>
-                {deck.questions && <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>}
+                {deck && deck.title && <Text style={styles.textLarge}>{deck.title}</Text>}
+                {deck && deck.questions && <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>}
                 <TouchableOpacity style={styles.buttonAddCard} onPress={this.goToNewQuestionView}>
                     <Text>Add Card</Text>
                 </TouchableOpacity>
