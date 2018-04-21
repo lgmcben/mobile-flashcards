@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import * as DeckApi from '../utils/api'
 
 // New Question View
 // An option to enter in the question
@@ -8,7 +9,8 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 
 export default class NewDeck extends Component {
     state = {
-        title: ''    }
+        title: ''    
+    }
 
     handleTitleTextChange = (title) => {
         this.setState(() => ({
@@ -18,7 +20,8 @@ export default class NewDeck extends Component {
 
     submitNewDeck = () => {
         const uuidv1 = require('uuid/v1');
-        console.log('uuid =', uuidv1());
+        const key = uuidv1();
+        DeckApi.saveDeckTitle(this.state.title, key);
     }
 
     render() {

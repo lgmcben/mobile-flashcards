@@ -38,10 +38,20 @@ export function getDeck(id) {
     return tempData[id];
 }
 
-export function saveDeckTitle(title) {
+export function saveDeckTitle(title, key) {
+  console.log('saveDeckTitle');
+  const myPromise = AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+    [key]: { title }
+  }))
+  console.log('saveDeckTitle promise = ', myPromise);
 
 }
 
 export function addCardToDeck(title, card) {
-
+  console.log('addCardToDeck');
+  AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
+    const data = JSON.parse(results)
+    console.log('addCardToDeck data =', data); // you will need use the alert in here because this is the point in the execution which you receive the value from getItem.
+    // you could do your authentication and routing logic here but I suggest that you place them in another function and just pass the function as seen in the example below.
+});
 }

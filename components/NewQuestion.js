@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import * as DeckApi from '../utils/api'
 
 // New Question View
 // An option to enter in the question
@@ -25,7 +26,7 @@ export default class NewQuestion extends Component {
     }
 
     submitNewQuestion = () => {
-
+        DeckApi.addCardToDeck('','');
     }
 
     render() {
