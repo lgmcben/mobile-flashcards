@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native'
-import * as DeckApi from '../utils/api'
 import Deck from './Deck'
+import { fetchDeckListRequest } from '../actions'
+import { connect } from 'react-redux';
 
 const tempData = {
     React: {
@@ -28,26 +29,27 @@ const tempData = {
     }
   }
 
-export default class DeckList extends Component {
+class DeckList extends Component {
 
     state = {}
 
     componentDidMount() {
-        const decks = DeckApi.getDecks()
-            .then((arrayOfDecks) => this.setState({ decks: arrayOfDecks }));
-
+        console.log('DeckList componentDidMount this.props = ', this.props);
+        console.log('DeckList componentDidMount this.state = ', this.state);
+        this.props.dispatchFetchDeckList();
     }
 
     renderItem = ({ item }) => {
         return <Deck {...item} navigation={this.props.navigation} />
     }
 
-    render() {
-        console.log('DeckList state = ', this.state);
+    render = () => {
+        console.log('DeckList render state = ', this.state);
+        console.log('DeckList render props = ', this.props);
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={this.state.decks}
+                    data={this.props.decks}
                     renderItem={this.renderItem}
                 />
             </View>
@@ -62,3 +64,17 @@ const styles = StyleSheet.create({
         paddingTop: 20
     }
 })
+
+function mapStateToProps ({deckList, deckDetail}, ownProps) {
+    return {
+        decks: deckList.decks,
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        dispatchFetchDeckList: (data) => dispatch(fetchDeckListRequest(data)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);

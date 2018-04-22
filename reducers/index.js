@@ -1,20 +1,21 @@
 import {
     ADD_NEW_DECK_SUCCESS,
-    FECK_DECKLIST_SUCCESS
+    FECTCH_DECKLIST_SUCCESS
 } from '../actions';
 import { combineReducers } from 'redux';
 
 const initialState = {
-    deckList: [],
-    deckDetail: {}
+    decks: [],
 }
 
-function deckList (state = {}, action) {
+function deckList (state = initialState, action) {
     switch (action.type) {
-        case FECK_DECKLIST_SUCCESS:
+        case FECTCH_DECKLIST_SUCCESS:
+            // console.log('reducer, FECTCH_DECKLIST_SUCCESS, action.decks = ', action.decks);
+
             return {
                 ...state,
-                comments: [...state.comments, action.newComment]
+                decks: action.decks
             };
         default:
             return state;
