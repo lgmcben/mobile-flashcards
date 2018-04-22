@@ -27,7 +27,9 @@ class NewDeck extends Component {
             const key = uuidv1();
             // DeckApi.saveDeckTitle(this.state.title, key)
             // .then(() => { this.props.navigation.navigate('DeckDetail', { id: key }); })
+            this.props.navigation.navigate('DeckDetail', { id: key });
             this.props.dispatchAddNewDeck(title, key);
+
 
         }else{
             // Works on both iOS and Android

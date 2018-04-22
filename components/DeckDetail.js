@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import * as DeckApi from '../utils/api'
+import { connect } from 'react-redux';
+import { fetchDeckRequest } from '../actions'
 
-export default class DeckDetail extends Component {
+
+class DeckDetail extends Component {
 
     state = {
         deck: { title: '', questions: '' }
     }
 
     componentDidMount() {
-        DeckApi.getDeck(this.props.navigation.state.params.id)
-        .then((deck) => { this.setState({ deck }) });
+        // DeckApi.getDeck(this.props.navigation.state.params.id)
+        // .then((deck) => { this.setState({ deck }) });
+        // this.props.dispatchFetchDeck(this.props.navigation.state.params.id);
 
         
     }
@@ -82,3 +86,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'black'
     }
 })
+
+function mapStateToProps ({deckList, deckDetail}, ownProps) {
+    console.log('ownProps', ownProps);
+    return {
+        deck: deckList.deck
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        dispatchFetchDeck: (data) => dispatch(fetchDeckRequest(data)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail);

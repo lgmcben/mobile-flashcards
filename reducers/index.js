@@ -1,16 +1,18 @@
 import {
     ADD_DECK_SUCCESS,
-    FECTCH_DECKLIST_SUCCESS
+    FETCH_DECKLIST_SUCCESS,
+    FETCH_DECK_SUCCESS
 } from '../actions';
 import { combineReducers } from 'redux';
 
 const initialState = {
     decks: [],
+    deck: {}
 }
 
 function deckList (state = initialState, action) {
     switch (action.type) {
-        case FECTCH_DECKLIST_SUCCESS:
+        case FETCH_DECKLIST_SUCCESS:
             return {
                 ...state,
                 decks: action.decks
@@ -18,7 +20,8 @@ function deckList (state = initialState, action) {
         case ADD_DECK_SUCCESS:
             return {
                 ...state,
-                decks: [...state.decks, action.deck]
+                decks: [...state.decks, action.deck],
+                deck: action.deck
             };
         default:
             return state;
@@ -27,6 +30,13 @@ function deckList (state = initialState, action) {
 
 function deckDetail (state = initialState, action) {
     switch (action.type) {
+
+        case FETCH_DECK_SUCCESS:
+            console.log('reducer FETCH_DECK_SUCCESS, action =', action)
+            return {
+                ...state,
+                deck: action.deck
+            };
         default:
             return state;
     }
