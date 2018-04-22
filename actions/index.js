@@ -1,22 +1,21 @@
 import * as DeckApi from '../utils/api'
-
-export const ADD_NEW_DECK_REQUEST = 'ADD_NEW_DECK_REQUEST';
-export const ADD_NEW_DECK_SUCCESS = 'ADD_NEW_DECK_SUCCESS';
-export const FECTCH_DECKLIST_SUCCESS = 'FECTCH_DECKLIST_SUCCESS';
+export const ADD_DECK_SUCCESS = 'add_deck_success';
+export const FECTCH_DECKLIST_SUCCESS = 'fetch_decklist_success';
 
 export const addDeckRequest = (title, key) => dispatch => {
 	console.log('action addDeckRequest');
     return DeckApi.saveDeckTitle(title, key)
        .then(() => {
        		console.log('saveDeckTitle success in actions')
-       		dispatch(addDeckSuccess(deck))
+       		DeckApi.getDeck(key)
+        		.then((deck) => { dispatch(addDeckSuccess(deck)) });	
        })
 }
 
 export const addDeckSuccess = deck => {
-	// console.log('fetchDeckListSuccess');
+	console.log('addDeckSuccess deck = ', deck);
 	return {
-        type: ADD_NEW_DECK_SUCCESS,
+        type: ADD_DECK_SUCCESS,
         deck
     }
 }
@@ -26,8 +25,6 @@ export const fetchDeckListRequest = () => dispatch => {
     return DeckApi.getDecks()
        .then(decks => dispatch(fetchDeckListSuccess(decks)))
 }
-	
-
 
 export const fetchDeckListSuccess = decks => {
 	// console.log('fetchDeckListSuccess');
@@ -36,5 +33,3 @@ export const fetchDeckListSuccess = decks => {
         decks
     }
 }
-    
-

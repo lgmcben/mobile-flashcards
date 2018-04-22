@@ -1,5 +1,5 @@
 import {
-    ADD_NEW_DECK_SUCCESS,
+    ADD_DECK_SUCCESS,
     FECTCH_DECKLIST_SUCCESS
 } from '../actions';
 import { combineReducers } from 'redux';
@@ -11,11 +11,14 @@ const initialState = {
 function deckList (state = initialState, action) {
     switch (action.type) {
         case FECTCH_DECKLIST_SUCCESS:
-            // console.log('reducer, FECTCH_DECKLIST_SUCCESS, action.decks = ', action.decks);
-
             return {
                 ...state,
                 decks: action.decks
+            };
+        case ADD_DECK_SUCCESS:
+            return {
+                ...state,
+                decks: [...state.decks, action.deck]
             };
         default:
             return state;
