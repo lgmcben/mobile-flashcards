@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 function mapStateToProps ({deckList, deckDetail}, ownProps) {
     console.log('ownProps', ownProps);
     return {
-        deck: deckList.deck
+        deck: deckList.decks.find(x => x.id === ownProps.navigation.state.params.id)
     }
 }
 
