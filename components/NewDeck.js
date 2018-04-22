@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native'
 import * as DeckApi from '../utils/api'
+import { addDeckRequest } from '../actions'
+import { connect } from 'react-redux';
 
 // New Question View
 // An option to enter in the question
 // An option to enter in the answer
 // An option to submit the new question
 
-export default class NewDeck extends Component {
+class NewDeck extends Component {
     state = {
         title: ''    
     }
@@ -19,11 +21,13 @@ export default class NewDeck extends Component {
     }
 
     submitNewDeck = () => {
-        if (/\S/.test(this.state.title)) {
+        const { title } = this.state;
+        if (/\S/.test(title)) {
             const uuidv1 = require('uuid/v1');
             const key = uuidv1();
-            DeckApi.saveDeckTitle(this.state.title, key)
-            .then(() => { this.props.navigation.navigate('DeckDetail', { id: key }); })
+            // DeckApi.saveDeckTitle(this.state.title, key)
+            // .then(() => { this.props.navigation.navigate('DeckDetail', { id: key }); })
+            this.props.dispatchAddNewDeck(title, key);
 
         }else{
             // Works on both iOS and Android
@@ -82,3 +86,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
 })
+
+function mapDispatchToProps (dispatch) {
+    return {
+        dispatchAddNewDeck: (data) => dispatch(addDeckRequest(data)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NewDeck);
