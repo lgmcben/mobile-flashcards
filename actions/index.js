@@ -5,9 +5,9 @@ export const FETCH_DECKLIST_SUCCESS = 'fetch_decklist_success';
 export const FETCH_DECK_SUCCESS = 'fetch_deck_success';
 
 
-export const addDeckRequest = (title, key) => dispatch => {
+export const addDeckRequest = ({title, key} = {}) => dispatch => {
 	console.log('action addDeckRequest');
-    return DeckApi.saveDeckTitle(title, key)
+    return DeckApi.saveDeckTitle({title: title, key: key})
        .then(() => {
        		DeckApi.getDeck(key)
         		.then((deck) => { 

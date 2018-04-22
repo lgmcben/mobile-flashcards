@@ -28,7 +28,8 @@ class NewDeck extends Component {
             // DeckApi.saveDeckTitle(this.state.title, key)
             // .then(() => { this.props.navigation.navigate('DeckDetail', { id: key }); })
             this.props.navigation.navigate('DeckDetail', { id: key });
-            this.props.dispatchAddNewDeck(title, key);
+
+            this.props.dispatchAddNewDeck({title: title, key: key});
 
 
         }else{
