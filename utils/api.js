@@ -68,7 +68,7 @@ export function addCardToDeck({key='', question='', answer=''} = {}) {
   // Create a card object
   const card = {question: question, answer: answer};
 
-  AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
      const decks = JSON.parse(results);
 
      // Add new card to existing questions array

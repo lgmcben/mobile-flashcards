@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ToastAndroid, Platform, Alert } from 'react-native'
 import * as DeckApi from '../utils/api'
 import { connect } from 'react-redux';
 import { addCardRequest } from '../actions'
@@ -28,10 +28,35 @@ class NewQuestion extends Component {
     }
 
     submitNewQuestion = () => {
-        console.log('key',this.props.navigation.state.params.key);
-        console.log('question', this.state.textQuestion);
-        console.log('answer', this.state.textAnswer);
-        DeckApi.addCardToDeck({key: this.props.navigation.state.params.key, question: this.state.textQuestion, answer: this.state.textAnswer});
+        if (/\S/.test(this.state.textQuestion) && /\S/.test(this.state.textAnswer)) {
+            this.props.dispatchAddCard({key: this.props.navigation.state.params.key, question: this.state.textQuestion, answer: this.state.textAnswer});
+            this.setState({
+                textQuestion: '',
+                textAnswer: '',
+            });
+            Alert.alert(
+              'Success',
+              `Question ${this.state.textQuestion} added to the deck`,
+              [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ],
+              { cancelable: true }
+            )
+            
+        }else{
+            // Works on both iOS and Android
+            Alert.alert(
+              'Question or Answer field is empty',
+              'Please enter both question and answer',
+              [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ],
+              { cancelable: true }
+            )
+        }
+
+        
+
     }
 
     render() {
@@ -43,12 +68,10 @@ class NewQuestion extends Component {
                 <TextInput
                     style={styles.textInput}
                     value={textQuestion}
-                    placeholder={'Question...'}
                     onChangeText={this.handleQuestionTextChange}/>
                 <TextInput
                     style={styles.textInput}
                     value={textAnswer}
-                    placeholder={'Answer...'}
                     onChangeText={this.handleAnswerTextChange}/>
                 <TouchableOpacity style={styles.buttonSubmit} onPress={this.submitNewQuestion}>
                     <Text>Submit</Text>
@@ -86,7 +109,7 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps (dispatch) {
     return {
-        dispatchAddNewDeck: (data) => dispatch(addDeckRequest(data)),
+        dispatchAddCard: (data) => dispatch(addCardRequest(data)),
     }
 }
 

@@ -17,6 +17,7 @@ export const addCardRequest = ({key='', question='', answer=''} = {}) => dispatc
 }
 
 export const addCardSuccess = decks => {
+  console.log('addCardSuccess, decks = ', decks )
   return {
         type: ADD_CARD_SUCCESS,
         decks
