@@ -8,7 +8,7 @@ import { fetchDeckRequest } from '../actions'
 class DeckDetail extends Component {
 
     state = {
-        deck: { title: '', questions: '' }
+        
     }
 
     componentDidMount() {
@@ -20,7 +20,7 @@ class DeckDetail extends Component {
     }
 
     goToNewQuestionView = () => {
-        this.props.navigation.navigate('NewQuestion', {} );
+        this.props.navigation.navigate('NewQuestion', {key: this.props.deck.id} );
     }
 
     goToQuizView = () => {

@@ -1,7 +1,8 @@
 import {
     ADD_DECK_SUCCESS,
     FETCH_DECKLIST_SUCCESS,
-    FETCH_DECK_SUCCESS
+    FETCH_DECK_SUCCESS,
+    ADD_CARD_SUCCESS
 } from '../actions';
 import { combineReducers } from 'redux';
 
@@ -22,6 +23,11 @@ function deckList (state = initialState, action) {
                 ...state,
                 decks: action.decks
             };
+        case ADD_CARD_SUCCESS:
+            return {
+                ...state,
+                decks: action.decks
+            }; 
         default:
             return state;
     }

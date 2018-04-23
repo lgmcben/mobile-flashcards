@@ -28,7 +28,10 @@ class NewQuestion extends Component {
     }
 
     submitNewQuestion = () => {
-        DeckApi.addCardToDeck({key: '74993590-4700-11e8-a2a0-490aa4f4b6a8', question: '333', answer: '555'});
+        console.log('key',this.props.navigation.state.params.key);
+        console.log('question', this.state.textQuestion);
+        console.log('answer', this.state.textAnswer);
+        DeckApi.addCardToDeck({key: this.props.navigation.state.params.key, question: this.state.textQuestion, answer: this.state.textAnswer});
     }
 
     render() {

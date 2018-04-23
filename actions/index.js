@@ -5,15 +5,22 @@ export const ADD_CARD_SUCCESS = 'add_card_success';
 export const FETCH_DECKLIST_SUCCESS = 'fetch_decklist_success';
 export const FETCH_DECK_SUCCESS = 'fetch_deck_success';
 
-export const addCardRequest = ({question, answer} = {}) => dispatch => {
+export const addCardRequest = ({key='', question='', answer=''} = {}) => dispatch => {
   console.log('action addCardRequest');
-    return DeckApi.saveDeckTitle({title: title, key: key})
+    return DeckApi.addCardToDeck({key: key, question: question, answer: answer})
        .then(() => {
           DeckApi.getDecks()
             .then((decks) => {
-              dispatch(addDeckSuccess(decks))
+              dispatch(addCardSuccess(decks))
             });
        })
+}
+
+export const addCardSuccess = decks => {
+  return {
+        type: ADD_CARD_SUCCESS,
+        decks
+    }
 }
 
 export const addDeckRequest = ({title, key} = {}) => dispatch => {
