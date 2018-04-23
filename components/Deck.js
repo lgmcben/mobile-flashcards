@@ -12,14 +12,14 @@ export default class Deck extends Component {
         console.log('onDeckPressed props = ', this.props);
         const { bounceValue } = this.state
         Animated.sequence([
-            Animated.timing(bounceValue, { duration: 200, toValue: 1.05} ),
-            Animated.spring(bounceValue, { toValue: 1, friction: 5}),
-        ]).start();
-        //ben temp navigate after animation end
-        //]).start(this.props.onDeckPressed2);
+            Animated.timing(bounceValue, { duration: 300, toValue: 1.1} ),
+            Animated.timing(bounceValue, { duration: 300, toValue: 1.0} ),
+            // Animated.spring(bounceValue, { toValue: 1, friction: 5}),
+        ]).start(this.goToDeckDetail);
+    }
 
+    goToDeckDetail = () => {
         this.props.navigation.navigate('DeckDetail', { id: this.props.id });
-
     }
 
     render() {
