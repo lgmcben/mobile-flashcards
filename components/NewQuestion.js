@@ -28,7 +28,7 @@ class NewQuestion extends Component {
     }
 
     submitNewQuestion = () => {
-        DeckApi.addCardToDeck({key: '74993590-4700-11e8-a2a0-490aa4f4b6a8', question: 'qqq', answer: 'aaa'});
+        DeckApi.addCardToDeck({key: '74993590-4700-11e8-a2a0-490aa4f4b6a8', question: '333', answer: '555'});
     }
 
     render() {

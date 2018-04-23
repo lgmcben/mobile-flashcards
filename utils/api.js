@@ -65,31 +65,22 @@ export function saveDeckTitle({title='', key=''} = {}) {
 export function addCardToDeck({key='', question='', answer=''} = {}) {
   console.log('addCardToDeck key = ', key);
 
+  // Create a card object
   const card = {question: question, answer: answer};
 
   AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
      const decks = JSON.parse(results);
 
-     // Add new questions to the existing ones
-     let questions = JSON.parse(JSON.stringify(decks[key].questions));
+     // Add new card to existing questions array
+     let questions = decks[key].questions;
      questions.push(card);
 
-     // Create new updated card
+     // Create new deck string
      const newDeck = JSON.stringify({
-       [key]: { title: 'Arr', questions }
+       [key]: { questions }
      });
 
      // Merge to storage
      AsyncStorage.mergeItem(DECK_STORAGE_KEY, newDeck);
-    // const data = JSON.parse(results)
-    // console.log('addCardToDeck data =', data); 
-
-    // const targetDeck = data[key];
-    // console.log('targetDeck', targetDeck);
-
-    // AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
-    //   // [key]: { questions: [ ...questions, {question: question, answer: answer}] }
-    //   [key]: { questions2: [{kuay: 'sard'}, {shia: 'sarddd'}] }
-    // }))
   });
 }
