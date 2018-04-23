@@ -30,6 +30,7 @@ class NewDeck extends Component {
             this.props.navigation.navigate('DeckDetail', { id: key });
 
             this.props.dispatchAddNewDeck({title: title, key: key});
+            this.setState({ title: ''});
 
 
         }else{
