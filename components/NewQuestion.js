@@ -38,10 +38,12 @@ export default class NewQuestion extends Component {
                 <TextInput
                     style={styles.textInput}
                     value={textQuestion}
+                    placeholder={'Question...'}
                     onChangeText={this.handleQuestionTextChange}/>
                 <TextInput
                     style={styles.textInput}
                     value={textAnswer}
+                    placeholder={'Answer...'}
                     onChangeText={this.handleAnswerTextChange}/>
                 <TouchableOpacity style={styles.buttonSubmit} onPress={this.submitNewQuestion}>
                     <Text>Submit</Text>
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     textInput: {
+        padding:10,
         marginBottom: 20
     },
     buttonSubmit: {
