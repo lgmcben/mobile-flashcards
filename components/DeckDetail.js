@@ -16,7 +16,7 @@ class DeckDetail extends Component {
         // .then((deck) => { this.setState({ deck }) });
         // this.props.dispatchFetchDeck(this.props.navigation.state.params.id);
 
-        
+
     }
 
     goToNewQuestionView = () => {
@@ -30,7 +30,7 @@ class DeckDetail extends Component {
     render() {
         console.log('DeckDetail render() props=', this.props);
         console.log('DeckDetail render() state=', this.state);
-        const { deck } = this.state;
+        const { deck } = this.props;
         return (
             <View style={styles.container}>
                 <Text style={styles.textLarge}>{deck.title}</Text>
