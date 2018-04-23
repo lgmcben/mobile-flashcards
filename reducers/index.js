@@ -20,8 +20,7 @@ function deckList (state = initialState, action) {
         case ADD_DECK_SUCCESS:
             return {
                 ...state,
-                decks: [...state.decks, action.deck],
-                deck: action.deck
+                decks: action.decks
             };
         default:
             return state;

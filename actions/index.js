@@ -9,18 +9,18 @@ export const addDeckRequest = ({title, key} = {}) => dispatch => {
 	console.log('action addDeckRequest');
     return DeckApi.saveDeckTitle({title: title, key: key})
        .then(() => {
-       		DeckApi.getDeck(key)
-        		.then((deck) => { 
-        			dispatch(addDeckSuccess(deck)) 
-        		});	
+       		DeckApi.getDecks()
+        		.then((decks) => {
+        			dispatch(addDeckSuccess(decks))
+        		});
        })
 }
 
-export const addDeckSuccess = deck => {
-	console.log('addDeckSuccess deck = ', deck);
+export const addDeckSuccess = decks => {
+	console.log('addDeckSuccess decks = ', decks);
 	return {
         type: ADD_DECK_SUCCESS,
-        deck
+        decks
     }
 }
 
