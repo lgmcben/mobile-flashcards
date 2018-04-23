@@ -31,24 +31,29 @@ class DeckDetail extends Component {
         console.log('DeckDetail render() props=', this.props);
         console.log('DeckDetail render() state=', this.state);
         const { deck } = this.props;
-        return (
-            <View style={styles.container}>
-                <Text style={styles.textLarge}>{deck.title}</Text>
+        if(deck){
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.textLarge}>{deck.title}</Text>
 
-                {deck.questions?
-                        <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
-                        :
-                        <Text style={{color: 'gray'}}>0 cards</Text>
-                }
+                    {deck.questions?
+                            <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
+                            :
+                            <Text style={{color: 'gray'}}>0 cards</Text>
+                    }
 
-                <TouchableOpacity style={styles.buttonAddCard} onPress={this.goToNewQuestionView}>
-                    <Text>Add Card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonStartQuiz} onPress={this.goToQuizView}>
-                    <Text style={{color: 'white'}}>Start Quiz</Text>
-                </TouchableOpacity>
-            </View>
-        )
+                    <TouchableOpacity style={styles.buttonAddCard} onPress={this.goToNewQuestionView}>
+                        <Text>Add Card</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonStartQuiz} onPress={this.goToQuizView}>
+                        <Text style={{color: 'white'}}>Start Quiz</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        }else{
+            return null
+        }
+
     }
 }
 
