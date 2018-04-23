@@ -1,9 +1,20 @@
 import * as DeckApi from '../utils/api'
 
 export const ADD_DECK_SUCCESS = 'add_deck_success';
+export const ADD_CARD_SUCCESS = 'add_card_success';
 export const FETCH_DECKLIST_SUCCESS = 'fetch_decklist_success';
 export const FETCH_DECK_SUCCESS = 'fetch_deck_success';
 
+export const addCardRequest = ({question, answer} = {}) => dispatch => {
+  console.log('action addCardRequest');
+    return DeckApi.saveDeckTitle({title: title, key: key})
+       .then(() => {
+          DeckApi.getDecks()
+            .then((decks) => {
+              dispatch(addDeckSuccess(decks))
+            });
+       })
+}
 
 export const addDeckRequest = ({title, key} = {}) => dispatch => {
 	console.log('action addDeckRequest');

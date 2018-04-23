@@ -37,7 +37,7 @@ class DeckDetail extends Component {
                     <Text style={styles.textLarge}>{deck.title}</Text>
 
                     {deck.questions?
-                            <Text style={{color: 'gray'}}>{this.props.questions.length} cards</Text>
+                            <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>
                             :
                             <Text style={{color: 'gray'}}>0 cards</Text>
                     }

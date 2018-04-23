@@ -56,17 +56,40 @@ export function saveDeckTitle({title='', key=''} = {}) {
   console.log('saveDeckTitle, title = ', title);
   console.log('saveDeckTitle, key = ', key);
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
-    [key]: { title }
+    [key]: { title, questions: [] }
   }))
   console.log('saveDeckTitle promise = ', myPromise);
 
 }
 
-export function addCardToDeck(title, card) {
-  console.log('addCardToDeck');
+export function addCardToDeck({key='', question='', answer=''} = {}) {
+  console.log('addCardToDeck key = ', key);
+
+  const card = {question: question, answer: answer};
+
   AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
-    const data = JSON.parse(results)
-    console.log('addCardToDeck data =', data); // you will need use the alert in here because this is the point in the execution which you receive the value from getItem.
-    // you could do your authentication and routing logic here but I suggest that you place them in another function and just pass the function as seen in the example below.
-});
+     const decks = JSON.parse(results);
+
+     // Add new questions to the existing ones
+     let questions = JSON.parse(JSON.stringify(decks[key].questions));
+     questions.push(card);
+
+     // Create new updated card
+     const newDeck = JSON.stringify({
+       [key]: { title: 'Arr', questions }
+     });
+
+     // Merge to storage
+     AsyncStorage.mergeItem(DECK_STORAGE_KEY, newDeck);
+    // const data = JSON.parse(results)
+    // console.log('addCardToDeck data =', data); 
+
+    // const targetDeck = data[key];
+    // console.log('targetDeck', targetDeck);
+
+    // AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+    //   // [key]: { questions: [ ...questions, {question: question, answer: answer}] }
+    //   [key]: { questions2: [{kuay: 'sard'}, {shia: 'sarddd'}] }
+    // }))
+  });
 }

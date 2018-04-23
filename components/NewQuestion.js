@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import * as DeckApi from '../utils/api'
+import { connect } from 'react-redux';
+import { addCardRequest } from '../actions'
 
 // New Question View
 // An option to enter in the question
 // An option to enter in the answer
 // An option to submit the new question
 
-export default class NewQuestion extends Component {
+class NewQuestion extends Component {
     state = {
         textQuestion: '',
         textAnswer: '',
@@ -26,7 +28,7 @@ export default class NewQuestion extends Component {
     }
 
     submitNewQuestion = () => {
-        DeckApi.addCardToDeck('','');
+        DeckApi.addCardToDeck({key: '74993590-4700-11e8-a2a0-490aa4f4b6a8', question: 'qqq', answer: 'aaa'});
     }
 
     render() {
@@ -78,3 +80,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
 })
+
+function mapDispatchToProps (dispatch) {
+    return {
+        dispatchAddNewDeck: (data) => dispatch(addDeckRequest(data)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NewQuestion);
