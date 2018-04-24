@@ -13,7 +13,10 @@ export default class Quiz extends Component {
 // Displays the percentage correct once the quiz is complete
     state = {
         currentQuestionIndex: 0,
-        showAnswer: false
+        numberOfCorrectGuess: 0,
+        showAnswer: false,
+        showSummary: false
+
     }
 
     toggleAnswer = () => {
@@ -21,35 +24,74 @@ export default class Quiz extends Component {
           showAnswer: !previousState.showAnswer
         }));
     }
+
+    userGuessCorrect = () => {
+        const { questions } = this.props.navigation.state.params;
+        if(this.state.currentQuestionIndex < questions.length-1){
+            this.setState(previousState => ({
+              numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
+              currentQuestionIndex: previousState.currentQuestionIndex+1
+            }));
+        }else{
+            this.setState({ showSummary: true});
+            console.log('last question');
+        }
+
+    }
+
+    userGuessIncorrect = () => {
+        const { questions } = this.props.navigation.state.params;
+        if(this.state.currentQuestionIndex < questions.length-1){
+            this.setState(previousState => ({
+              currentQuestionIndex: previousState.currentQuestionIndex+1
+            }));
+        }else{
+            this.setState({ showSummary: true});
+            console.log('last question');
+        }
+    }
+
     render() {
         console.log('Quiz props = ', this.props)
         console.log('Quiz state = ', this.state)
         const { questions } = this.props.navigation.state.params;
-        return (
-            <View style={styles.container}>
-                <View style={styles.cardNumberContainer}>
-                    <Text>Card # {this.state.currentQuestionIndex} / {questions.length}</Text>
+
+        // I'm not sure why {this.state.showSummary ? xxx : xxx } won't work
+        // Uncaught (in promise) Error: DeltaPatcher should receive a fresh Delta when being initialized
+        if(this.state.showSummary){
+            return (
+                <View style={styles.container}>
+                    <Text>You nailed {this.state.numberOfCorrectGuess} out of {questions.length} cards</Text>
                 </View>
-                {this.state.showAnswer ?
-                    <Text style={styles.textAnswer}>{questions[this.state.currentQuestionIndex].answer}</Text>
-                    :
-                    <Text style={styles.textQuestion}>{questions[this.state.currentQuestionIndex].question}</Text>
-                }
-                <TouchableOpacity style={styles.buttonShowAnswer} onPress={this.toggleAnswer}>
-                {this.state.showAnswer ?
-                    <Text>Show question</Text>
-                    :
-                    <Text>Show answer</Text>
-                }
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonCorrect} onPress={this.goToNewQuestionView}>
-                    <Text style={{color: 'white'}}>Correct</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonIncorrect} onPress={this.goToQuizView}>
-                    <Text style={{color: 'white'}}>Incorrect</Text>
-                </TouchableOpacity>
-            </View>
-        )
+            )
+        }else {
+            return (
+                <View style={styles.container}>
+                    <View style={styles.cardNumberContainer}>
+                        <Text>Card # {this.state.currentQuestionIndex + 1} / {questions.length}</Text>
+                    </View>
+                    {this.state.showAnswer ?
+                        <Text style={styles.textAnswer}>{questions[this.state.currentQuestionIndex].answer}</Text>
+                        :
+                        <Text style={styles.textQuestion}>{questions[this.state.currentQuestionIndex].question}</Text>
+                    }
+                    <TouchableOpacity style={styles.buttonShowAnswer} onPress={this.toggleAnswer}>
+                    {this.state.showAnswer ?
+                        <Text>Show question</Text>
+                        :
+                        <Text>Show answer</Text>
+                    }
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonCorrect} onPress={this.userGuessCorrect}>
+                        <Text style={{color: 'white'}}>Correct</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonIncorrect} onPress={this.userGuessIncorrect}>
+                        <Text style={{color: 'white'}}>Incorrect</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        }
+
     }
 }
 
