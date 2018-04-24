@@ -8,7 +8,7 @@ import { fetchDeckRequest } from '../actions'
 class DeckDetail extends Component {
 
     state = {
-        
+
     }
 
     componentDidMount() {
@@ -24,12 +24,12 @@ class DeckDetail extends Component {
     }
 
     goToQuizView = () => {
-        this.props.navigation.navigate('Quiz', {} );
+        this.props.navigation.navigate('Quiz', {questions: this.props.deck.questions} );
     }
 
     render() {
-        console.log('DeckDetail render() props=', this.props);
-        console.log('DeckDetail render() state=', this.state);
+        // console.log('DeckDetail render() props=', this.props);
+        // console.log('DeckDetail render() state=', this.state);
         const { deck } = this.props;
         if(deck){
             return (
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps ({deckList, deckDetail}, ownProps) {
-    console.log('ownProps', ownProps);
+    // console.log('ownProps', ownProps);
     return {
         deck: deckList.decks.find(x => x.id === ownProps.navigation.state.params.id)
     }

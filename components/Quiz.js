@@ -12,6 +12,7 @@ export default class Quiz extends Component {
 // the number of cards left in the quiz
 // Displays the percentage correct once the quiz is complete
     render() {
+        console.log('Quiz props = ', this.props)
         return (
             <View style={styles.container}>
                 <Text>Quiz view</Text>

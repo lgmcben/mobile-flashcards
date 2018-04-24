@@ -34,8 +34,8 @@ class DeckList extends Component {
     state = {}
 
     componentDidMount() {
-        console.log('DeckList componentDidMount this.props = ', this.props);
-        console.log('DeckList componentDidMount this.state = ', this.state);
+        // console.log('DeckList componentDidMount this.props = ', this.props);
+        // console.log('DeckList componentDidMount this.state = ', this.state);
         this.props.dispatchFetchDeckList();
     }
 
@@ -44,8 +44,8 @@ class DeckList extends Component {
     }
 
     render = () => {
-        console.log('DeckList render state = ', this.state);
-        console.log('DeckList render props = ', this.props);
+        // console.log('DeckList render state = ', this.state);
+        // console.log('DeckList render props = ', this.props);
         return (
             <View style={styles.container}>
                 <FlatList
