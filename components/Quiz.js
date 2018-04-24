@@ -27,18 +27,26 @@ export default class Quiz extends Component {
         const { questions } = this.props.navigation.state.params;
         return (
             <View style={styles.container}>
-                <Text>{this.state.currentQuestionIndex} / {questions.length}</Text>
+                <View style={styles.cardNumberContainer}>
+                    <Text>Card # {this.state.currentQuestionIndex} / {questions.length}</Text>
+                </View>
                 {this.state.showAnswer ?
-                    <Text>{questions[this.state.currentQuestionIndex].answer}</Text>
+                    <Text style={styles.textAnswer}>{questions[this.state.currentQuestionIndex].answer}</Text>
                     :
-                    <Text>{questions[this.state.currentQuestionIndex].question}</Text>
+                    <Text style={styles.textQuestion}>{questions[this.state.currentQuestionIndex].question}</Text>
                 }
-                <TouchableOpacity style={styles.buttonAddCard} onPress={this.toggleAnswer}>
+                <TouchableOpacity style={styles.buttonShowAnswer} onPress={this.toggleAnswer}>
                 {this.state.showAnswer ?
                     <Text>Show question</Text>
                     :
                     <Text>Show answer</Text>
                 }
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonCorrect} onPress={this.goToNewQuestionView}>
+                    <Text style={{color: 'white'}}>Correct</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonIncorrect} onPress={this.goToQuizView}>
+                    <Text style={{color: 'white'}}>Incorrect</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -50,5 +58,44 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    cardNumberContainer: {
+        marginBottom: 30,
+    },
+    textQuestion: {
+        fontSize: 24,
+    },
+    textAnswer: {
+        fontSize: 24,
+        color: 'green'
+    },
+    buttonShowAnswer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 30,
+        marginBottom: 30,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'white'
+    },
+    buttonCorrect: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'green'
+    },
+    buttonIncorrect: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'red'
     }
 })
