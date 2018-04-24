@@ -15,7 +15,12 @@ export default class Deck extends Component {
             Animated.timing(bounceValue, { duration: 300, toValue: 1.1} ),
             Animated.timing(bounceValue, { duration: 300, toValue: 1.0} ),
             // Animated.spring(bounceValue, { toValue: 1, friction: 5}),
-        ]).start(this.goToDeckDetail);
+
+        // ]).start(this.goToDeckDetail);
+        ]).start();
+
+        //ben temp start animation immediately when testing
+        this.goToDeckDetail();
     }
 
     goToDeckDetail = () => {
@@ -33,7 +38,7 @@ export default class Deck extends Component {
                         :
                         <Text style={{color: 'gray'}}>0 cards</Text>
                     }
-                    
+
                 </Animated.View>
             </TouchableOpacity>
         )
