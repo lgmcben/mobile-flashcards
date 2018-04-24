@@ -24,7 +24,7 @@ class DeckDetail extends Component {
     }
 
     goToQuizView = () => {
-        this.props.navigation.navigate('Quiz', {questions: this.props.deck.questions} );
+        this.props.navigation.navigate('Quiz', {questions: this.props.deck.questions, deckId: this.props.deck.id} );
     }
 
     render() {

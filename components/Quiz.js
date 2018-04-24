@@ -16,7 +16,6 @@ export default class Quiz extends Component {
         numberOfCorrectGuess: 0,
         showAnswer: false,
         showSummary: false
-
     }
 
     toggleAnswer = () => {
@@ -33,8 +32,10 @@ export default class Quiz extends Component {
               currentQuestionIndex: previousState.currentQuestionIndex+1
             }));
         }else{
-            this.setState({ showSummary: true});
-            console.log('last question');
+            this.setState(previousState => ({
+              numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
+              showSummary: true
+            }));
         }
 
     }
@@ -51,6 +52,19 @@ export default class Quiz extends Component {
         }
     }
 
+    restartQuiz = () => {
+        this.setState({
+            currentQuestionIndex: 0,
+            numberOfCorrectGuess: 0,
+            showAnswer: false,
+            showSummary: false
+        })
+    }
+
+    backToDeck = () => {
+        this.props.navigation.goBack();
+    }
+
     render() {
         console.log('Quiz props = ', this.props)
         console.log('Quiz state = ', this.state)
@@ -61,8 +75,15 @@ export default class Quiz extends Component {
         if(this.state.showSummary){
             return (
                 <View style={styles.container}>
-                    <Text>You nailed {this.state.numberOfCorrectGuess} out of {questions.length} cards</Text>
+                    <Text style={styles.textQuestion}>You nailed {this.state.numberOfCorrectGuess} out of {questions.length} cards</Text>
+                    <TouchableOpacity style={styles.buttonRestartQuiz} onPress={this.restartQuiz}>
+                        <Text>Restart Quiz</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonBackToDeck} onPress={this.backToDeck}>
+                        <Text style={{color: 'white'}}>Back to Deck</Text>
+                    </TouchableOpacity>
                 </View>
+
             )
         }else {
             return (
@@ -107,6 +128,9 @@ const styles = StyleSheet.create({
     textQuestion: {
         fontSize: 24,
     },
+    textSummary: {
+        fontSize: 24,
+    },
     textAnswer: {
         fontSize: 24,
         color: 'green'
@@ -139,5 +163,28 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         backgroundColor: 'red'
+    },
+    buttonRestartQuiz: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 20,
+        marginBottom: 10,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'white'
+    },
+    buttonBackToDeck: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 20,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'black'
     }
 })
