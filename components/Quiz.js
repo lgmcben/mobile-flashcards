@@ -3,15 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 
 export default class Quiz extends Component {
-
-
-//     Quiz View
-// displays a card question
-// an option to view the answer (flips the card)
-// a "Correct" button
-// an "Incorrect" button
-// the number of cards left in the quiz
-// Displays the percentage correct once the quiz is complete
     state = {
         currentQuestionIndex: 0,
         numberOfCorrectGuess: 0,
@@ -39,7 +30,7 @@ export default class Quiz extends Component {
               showAnswer: false,
             }));
         }else{
-            // Last card
+            // User reached Last card
             this.scheduleNotificationForTomorrow();
             this.setState(previousState => ({
               numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
@@ -58,7 +49,7 @@ export default class Quiz extends Component {
               showAnswer: false,
             }));
         }else{
-            // Last card
+            // User reached Last card
             this.scheduleNotificationForTomorrow();
             this.setState(previousState => ({
               numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
@@ -82,12 +73,15 @@ export default class Quiz extends Component {
     }
 
     render() {
-        console.log('Quiz props = ', this.props)
-        console.log('Quiz state = ', this.state)
         const { questions } = this.props.navigation.state.params;
 
-        // I'm not sure why {this.state.showSummary ? xxx : xxx } won't work
-        // Uncaught (in promise) Error: DeltaPatcher should receive a fresh Delta when being initialized
+        // I'm not sure why {this.state.showSummary ? xxx : xxx } won't work here
+        // And there's an ongoing issue with console log in react-native: 
+        // https://github.com/facebook/react-native/issues/18209
+        //
+        // Which result in a console don't give me useful error info. It only displays:
+        // "Uncaught (in promise) Error: DeltaPatcher should receive a fresh Delta when being initialized"
+        // So I use a basic if/else statement here
         if(this.state.showSummary){
             return (
                 <View style={styles.container}>
@@ -99,7 +93,6 @@ export default class Quiz extends Component {
                         <Text style={{color: 'white'}}>Back to Deck</Text>
                     </TouchableOpacity>
                 </View>
-
             )
         }else {
             return (
@@ -128,7 +121,6 @@ export default class Quiz extends Component {
                 </View>
             )
         }
-
     }
 }
 
