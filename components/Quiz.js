@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 
 export default class Quiz extends Component {
 
@@ -24,6 +25,11 @@ export default class Quiz extends Component {
         }));
     }
 
+    scheduleNotificationForTomorrow = () => {
+        clearLocalNotification()
+            .then(setLocalNotification)
+    }
+
     userGuessCorrect = () => {
         const { questions } = this.props.navigation.state.params;
         if(this.state.currentQuestionIndex < questions.length-1){
@@ -32,6 +38,8 @@ export default class Quiz extends Component {
               currentQuestionIndex: previousState.currentQuestionIndex+1
             }));
         }else{
+            // Last card
+            this.scheduleNotificationForTomorrow();
             this.setState(previousState => ({
               numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
               showSummary: true
@@ -47,6 +55,8 @@ export default class Quiz extends Component {
               currentQuestionIndex: previousState.currentQuestionIndex+1
             }));
         }else{
+            // Last card
+            this.scheduleNotificationForTomorrow();
             this.setState({ showSummary: true});
             console.log('last question');
         }
