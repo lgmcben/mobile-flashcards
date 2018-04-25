@@ -1,17 +1,17 @@
+import { combineReducers } from 'redux';
 import {
     ADD_DECK_SUCCESS,
     FETCH_DECKLIST_SUCCESS,
-    FETCH_DECK_SUCCESS,
     ADD_CARD_SUCCESS
 } from '../actions';
-import { combineReducers } from 'redux';
 
 const initialState = {
     decks: [],
-    deck: {}
 }
 
 function deckList (state = initialState, action) {
+    // This reducer end up doing the same thing for each action until now
+    // But I leave the switch statement like this for possile future logic changes
     switch (action.type) {
         case FETCH_DECKLIST_SUCCESS:
             return {
@@ -33,21 +33,7 @@ function deckList (state = initialState, action) {
     }
 }
 
-function deckDetail (state = initialState, action) {
-    switch (action.type) {
-
-        case FETCH_DECK_SUCCESS:
-            console.log('reducer FETCH_DECK_SUCCESS, action =', action)
-            return {
-                ...state,
-                deck: action.deck
-            };
-        default:
-            return state;
-    }
-}
-
+// I'd prefer to leave combineReducers like this in case we want to add more reducer later. Not sure if this cause bad thing like performance hit?
 export default combineReducers({
     deckList,
-    deckDetail
 });
