@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { connect } from 'react-redux';
 
 class DeckDetail extends Component {
@@ -11,7 +11,18 @@ class DeckDetail extends Component {
     }
 
     goToQuizView = () => {
-        this.props.navigation.navigate('Quiz', {questions: this.props.deck.questions, deckId: this.props.deck.id} );
+        if(this.props.deck.questions.length === 0) {
+            Alert.alert(
+              'There is no card in this deck',
+              'Please add a card first',
+              [
+                {text: 'OK'},
+              ],
+              { cancelable: true }
+            )
+        } else {
+            this.props.navigation.navigate('Quiz', {questions: this.props.deck.questions, deckId: this.props.deck.id} );    
+        }
     }
 
     render() {

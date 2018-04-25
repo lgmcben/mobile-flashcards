@@ -52,7 +52,6 @@ export default class Quiz extends Component {
             // User reached Last card
             this.scheduleNotificationForTomorrow();
             this.setState(previousState => ({
-              numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
               showSummary: true,
               showAnswer: false,
             }));
