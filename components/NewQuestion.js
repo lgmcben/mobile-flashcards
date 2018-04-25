@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ToastAndroid, Platform, Alert } from 'react-native'
-import * as DeckApi from '../utils/api'
 import { connect } from 'react-redux';
 import { addCardRequest } from '../actions'
-
-// New Question View
-// An option to enter in the question
-// An option to enter in the answer
-// An option to submit the new question
 
 class NewQuestion extends Component {
     state = {
@@ -38,29 +32,23 @@ class NewQuestion extends Component {
               'Success',
               `Question ${this.state.textQuestion} added to the deck`,
               [
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                {text: 'OK'},
               ],
               { cancelable: true }
             )
-            
         }else{
-            // Works on both iOS and Android
             Alert.alert(
               'Question or Answer field is empty',
               'Please enter both question and answer',
               [
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                {text: 'OK'},
               ],
               { cancelable: true }
             )
         }
-
-        
-
     }
 
     render() {
-        console.log('NewQuestion state = ', this.state);
         const { textQuestion, textAnswer } = this.state
         return (
             <View style={styles.container}>
