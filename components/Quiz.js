@@ -35,14 +35,16 @@ export default class Quiz extends Component {
         if(this.state.currentQuestionIndex < questions.length-1){
             this.setState(previousState => ({
               numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
-              currentQuestionIndex: previousState.currentQuestionIndex+1
+              currentQuestionIndex: previousState.currentQuestionIndex+1,
+              showAnswer: false,
             }));
         }else{
             // Last card
             this.scheduleNotificationForTomorrow();
             this.setState(previousState => ({
               numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
-              showSummary: true
+              showSummary: true,
+              showAnswer: false,
             }));
         }
 
@@ -52,13 +54,17 @@ export default class Quiz extends Component {
         const { questions } = this.props.navigation.state.params;
         if(this.state.currentQuestionIndex < questions.length-1){
             this.setState(previousState => ({
-              currentQuestionIndex: previousState.currentQuestionIndex+1
+              currentQuestionIndex: previousState.currentQuestionIndex+1,
+              showAnswer: false,
             }));
         }else{
             // Last card
             this.scheduleNotificationForTomorrow();
-            this.setState({ showSummary: true});
-            console.log('last question');
+            this.setState(previousState => ({
+              numberOfCorrectGuess: previousState.numberOfCorrectGuess+1,
+              showSummary: true,
+              showAnswer: false,
+            }));
         }
     }
 
