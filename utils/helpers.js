@@ -1,4 +1,4 @@
-import { Notifications, Permission } from 'expo'
+import { Notifications, Permissions } from 'expo'
 import { AsyncStorage } from 'react-native'
 
 const NOTIFICATION_KEY = 'mobileFlashcards:notificaitons'
