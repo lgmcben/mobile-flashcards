@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import * as DeckApi from '../utils/api'
 import { connect } from 'react-redux';
-import { fetchDeckRequest } from '../actions'
-
 
 class DeckDetail extends Component {
 
@@ -99,10 +97,4 @@ function mapStateToProps ({deckList, deckDetail}, ownProps) {
     }
 }
 
-function mapDispatchToProps (dispatch) {
-    return {
-        dispatchFetchDeck: (data) => dispatch(fetchDeckRequest(data)),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail);
+export default connect(mapStateToProps, null)(DeckDetail);
