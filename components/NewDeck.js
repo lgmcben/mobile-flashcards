@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native'
-import * as DeckApi from '../utils/api'
-import { addDeckRequest } from '../actions'
 import { connect } from 'react-redux';
-
-// New Question View
-// An option to enter in the question
-// An option to enter in the answer
-// An option to submit the new question
+import { addDeckRequest } from '../actions'
 
 class NewDeck extends Component {
     state = {
@@ -22,34 +16,27 @@ class NewDeck extends Component {
 
     submitNewDeck = () => {
         const { title } = this.state;
+
+        // Basic form validation in case user press submit without typing anything
         if (/\S/.test(title)) {
             const uuidv1 = require('uuid/v1');
             const key = uuidv1();
-            // DeckApi.saveDeckTitle(this.state.title, key)
-            // .then(() => { this.props.navigation.navigate('DeckDetail', { id: key }); })
             this.props.navigation.navigate('DeckDetail', { id: key });
-
             this.props.dispatchAddNewDeck({title: title, key: key});
             this.setState({ title: ''});
-
-
         }else{
-            // Works on both iOS and Android
             Alert.alert(
               'Deck name is empty',
               'Please enter a deck name',
               [
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                {text: 'OK'},
               ],
               { cancelable: true }
             )
-            console.log('empty deck name');
         }
-        
     }
 
     render() {
-        console.log('NewDeck state = ', this.state);
         const { title } = this.state
         return (
             <View style={styles.container}>
