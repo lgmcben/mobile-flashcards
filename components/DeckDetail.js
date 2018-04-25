@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 class DeckDetail extends Component {
 
-    // I'm thinking about making this a funcional component. 
-    // But we need this.props.deck (connect with redux) so probably should leave it as class-based component?
     state = {}
 
     goToNewQuestionView = () => {
