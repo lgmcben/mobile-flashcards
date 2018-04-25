@@ -5,17 +5,9 @@ import { connect } from 'react-redux';
 
 class DeckDetail extends Component {
 
-    state = {
-
-    }
-
-    componentDidMount() {
-        // DeckApi.getDeck(this.props.navigation.state.params.id)
-        // .then((deck) => { this.setState({ deck }) });
-        // this.props.dispatchFetchDeck(this.props.navigation.state.params.id);
-
-
-    }
+    // I'm thinking about making this a funcional component. 
+    // But we need this.props.deck (connect with redux) so probably should leave it as class-based component?
+    state = {}
 
     goToNewQuestionView = () => {
         this.props.navigation.navigate('NewQuestion', {key: this.props.deck.id} );
@@ -26,20 +18,16 @@ class DeckDetail extends Component {
     }
 
     render() {
-        // console.log('DeckDetail render() props=', this.props);
-        // console.log('DeckDetail render() state=', this.state);
         const { deck } = this.props;
         if(deck){
             return (
                 <View style={styles.container}>
                     <Text style={styles.textLarge}>{deck.title}</Text>
-
                     {deck.questions?
-                            <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>
-                            :
-                            <Text style={{color: 'gray'}}>0 cards</Text>
+                        <Text style={{color: 'gray'}}>{deck.questions.length} cards</Text>
+                        :
+                        <Text style={{color: 'gray'}}>0 cards</Text>
                     }
-
                     <TouchableOpacity style={styles.buttonAddCard} onPress={this.goToNewQuestionView}>
                         <Text>Add Card</Text>
                     </TouchableOpacity>
@@ -51,7 +39,6 @@ class DeckDetail extends Component {
         }else{
             return null
         }
-
     }
 }
 
@@ -91,7 +78,6 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps ({deckList, deckDetail}, ownProps) {
-    // console.log('ownProps', ownProps);
     return {
         deck: deckList.decks.find(x => x.id === ownProps.navigation.state.params.id)
     }
