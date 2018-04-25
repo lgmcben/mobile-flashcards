@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import * as DeckApi from '../utils/api'
 import { connect } from 'react-redux';
 
 class DeckDetail extends Component {
