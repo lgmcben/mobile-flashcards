@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native'
 
+//  This class is for displaying a deck as list item
 export default class Deck extends Component {
     state = {
         bounceValue: new Animated.Value(1)
     }
 
-
     onDeckPressed = () => {
-
-        console.log('onDeckPressed props = ', this.props);
         const { bounceValue } = this.state
         Animated.sequence([
             Animated.timing(bounceValue, { duration: 300, toValue: 1.1} ),
@@ -32,12 +30,10 @@ export default class Deck extends Component {
                         :
                         <Text style={{color: 'gray'}}>0 cards</Text>
                     }
-
                 </Animated.View>
             </TouchableOpacity>
         )
     }
-
 }
 
 const styles = StyleSheet.create({
